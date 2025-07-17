@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas - Suitmedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .parallax-container {
+    position: relative;
+    overflow: hidden; /* Penting agar gambar yang keluar tidak tampil */
+    height: 24rem; /* h-96 = 384px */
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* ubah dari 120% menjadi 100% */
+    background-image: url(assets/bg-idea.jpg);
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    z-index: 0;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 10;
+}
+
+.banner-parallax {
+            transform: translateY(var(--scroll-offset, 0));
+        }
+        
+        .banner-clip {
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+}
+
+
+        
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .header-visible {
+            transform: translateY(0);
+            background-color: rgba(255, 87, 34, 0.95);
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .card-image {
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-orange-600 text-white transition-all duration-300 ease-in-out">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between lg:max-w-screen-xl">
+    
+    <!-- Logo -->
+    <div class="flex items-center">
+      <img src="assets/cropted-logo-suitmedia-removebg.png" alt="Suitmedia Logo" class="h-8">
+    </div>
+
+    <!-- Hamburger button (mobile only) -->
+    <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex space-x-8">
+      <a href="#" class="hover:text-orange-200 transition-colors">Work</a>
+      <a href="#" class="hover:text-orange-200 transition-colors">About</a>
+      <a href="#" class="hover:text-orange-200 transition-colors">Services</a>
+      <a href="#" class="border-b-2 border-white pb-1 font-semibold">Ideas</a>
+      <a href="#" class="hover:text-orange-200 transition-colors">Careers</a>
+      <a href="#" class="hover:text-orange-200 transition-colors">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden px-4 pb-4 hidden bg-orange-600 text-white">
+    <a href="#" class="block py-2 border-b border-white/20">Work</a>
+    <a href="#" class="block py-2 border-b border-white/20">About</a>
+    <a href="#" class="block py-2 border-b border-white/20">Services</a>
+    <a href="#" class="block py-2 border-b border-white/20 font-bold">Ideas</a>
+    <a href="#" class="block py-2 border-b border-white/20">Careers</a>
+    <a href="#" class="block py-2">Contact</a>
+  </div>
+</header>
+
+    <!-- Banner -->
+    <section class="relative h-96 overflow-hidden banner-clip pt-24">
+        <div class="absolute inset-0 banner-parallax" style="background-image: url(assets/bg-idea.jpg); background-size: cover; background-position: center;">
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="relative z-10 h-full flex items-center justify-center text-center text-white">
+            <div>
+                <h1 class="text-5xl font-bold mb-4">Ideas</h1>
+                <p class="text-xl opacity-90">Where all our great things begin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 lg:max-w-screen-xl">
+        <!-- Controls -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div id="showing-info" class="text-gray-600">
+                Showing 1-10 of 100
+            </div>
+            <div class="flex gap-4">
+                <div class="flex items-center gap-2">
+                    <label for="per-page" class="text-gray-600">Show per page:</label>
+                    <select id="per-page" class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2">
+                    <label for="sort-by" class="text-gray-600">Sort by:</label>
+                    <select id="sort-by" class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <option value="-published_at">Newest</option>
+                        <option value="published_at">Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="hidden text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
+            <p class="mt-2 text-gray-600">Loading...</p>
+        </div>
+
+        <!-- Posts Grid -->
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Posts will be loaded here -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="flex justify-center items-center gap-2">
+            <!-- Pagination will be loaded here -->
+        </div>
+    </main>
+
+    <script id="parallax-effect">
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxElement = document.querySelector('.banner-parallax');
+            
+            function handleParallax() {
+                const scrolled = window.pageYOffset;
+                const parallaxSpeed = 0.5;
+                parallaxElement.style.setProperty('--scroll-offset', `${scrolled * parallaxSpeed}px`);
+            }
+
+            window.addEventListener('scroll', handleParallax, { passive: true });
+        });
+
+        //toggle mobile-navbar
+        const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+    </script>
+
+    <script>
+        class IdeasPage {
+            constructor() {
+                this.currentPage = 1;
+                this.perPage = 10;
+                this.sortBy = '-published_at';
+                this.totalItems = 0;
+                this.totalPages = 0;
+                this.lastScrollY = 0;
+                this.isLoading = false;
+                
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadStateFromURL();
+                this.loadPosts();
+                this.setupParallax();
+                this.setupHeaderScroll();
+            }
+
+            setupEventListeners() {
+                document.getElementById('per-page').addEventListener('change', (e) => {
+                    this.perPage = parseInt(e.target.value);
+                    this.currentPage = 1;
+                    this.updateURL();
+                    this.loadPosts();
+                });
+
+                document.getElementById('sort-by').addEventListener('change', (e) => {
+                    this.sortBy = e.target.value;
+                    this.currentPage = 1;
+                    this.updateURL();
+                    this.loadPosts();
+                });
+            }
+
+            loadStateFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                this.currentPage = parseInt(urlParams.get('page')) || 1;
+                this.perPage = parseInt(urlParams.get('size')) || 10;
+                this.sortBy = urlParams.get('sort') || '-published_at';
+
+                document.getElementById('per-page').value = this.perPage;
+                document.getElementById('sort-by').value = this.sortBy;
+            }
+
+            updateURL() {
+                const params = new URLSearchParams();
+                params.set('page', this.currentPage);
+                params.set('size', this.perPage);
+                params.set('sort', this.sortBy);
+                
+                const newURL = `${window.location.pathname}?${params.toString()}`;
+                window.history.replaceState({}, '', newURL);
+            }
+
+            async loadPosts() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.showLoading(true);
+
+    try {
+        const url = `https://suitmedia-backend.suitdev.com/api/ideas?page[number]=${this.currentPage}&page[size]=${this.perPage}&append[]=small_image&append[]=medium_image&sort=${this.sortBy}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        this.totalItems = data.meta.total;
+        this.totalPages = data.meta.last_page;
+
+        this.renderPosts(data.data);
+        this.renderPagination();
+        this.updateShowingInfo();
+    } catch (error) {
+        console.error('Error loading posts:', error);
+        this.renderError();
+    } finally {
+        this.isLoading = false;
+        this.showLoading(false);
+    }
+}
+
+
+            showLoading(show) {
+                const loading = document.getElementById('loading');
+                const grid = document.getElementById('posts-grid');
+                
+                if (show) {
+                    loading.classList.remove('hidden');
+                    grid.classList.add('loading');
+                } else {
+                    loading.classList.add('hidden');
+                    grid.classList.remove('loading');
+                }
+            }
+
+renderPosts(posts) {
+    const grid = document.getElementById('posts-grid');
+
+    // Gambar fallback A dan B
+    const imageA = 'assets/pictureA.jpg';
+    const imageB = 'assets/pictureB.jpg';
+
+    grid.innerHTML = posts.map((post, index) => {
+        const fallbackImage = index % 2 === 0 ? imageA : imageB;
+
+        return `
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <img 
+                    src="${fallbackImage}" 
+                    alt="Fallback Image"
+                    class="card-image w-full lazy-load"
+                    loading="lazy"
+                >
+                <div class="p-4">
+                    <time class="text-sm text-gray-500">${this.formatDate(post.published_at)}</time>
+                    <h3 class="font-semibold text-gray-900 mt-2 line-clamp-3 leading-tight">
+                        ${post.title}
+                    </h3>
+                </div>
+            </article>
+        `;
+    }).join('');
+
+    this.setupLazyLoading();
+}
+
+            renderPagination() {
+                const pagination = document.getElementById('pagination');
+                const pages = [];
+
+                // Previous button
+                if (this.currentPage > 1) {
+                    pages.push(`
+                        <button onclick="ideasPage.goToPage(${this.currentPage - 1})" 
+                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
+                            ‹
+                        </button>
+                    `);
+                }
+
+                // Page numbers
+                const startPage = Math.max(1, this.currentPage - 2);
+                const endPage = Math.min(this.totalPages, this.currentPage + 2);
+
+                if (startPage > 1) {
+                    pages.push(`
+                        <button onclick="ideasPage.goToPage(1)" 
+                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
+                            1
+                        </button>
+                    `);
+                    if (startPage > 2) {
+                        pages.push('<span class="px-3 py-2 text-gray-400">...</span>');
+                    }
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const isActive = i === this.currentPage;
+                    pages.push(`
+                        <button onclick="ideasPage.goToPage(${i})" 
+                                class="px-3 py-2 ${isActive ? 'bg-orange-600 text-white' : 'text-gray-500 hover:text-orange-600'} transition-colors rounded">
+                            ${i}
+                        </button>
+                    `);
+                }
+
+                if (endPage < this.totalPages) {
+                    if (endPage < this.totalPages - 1) {
+                        pages.push('<span class="px-3 py-2 text-gray-400">...</span>');
+                    }
+                    pages.push(`
+                        <button onclick="ideasPage.goToPage(${this.totalPages})" 
+                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
+                            ${this.totalPages}
+                        </button>
+                    `);
+                }
+
+                // Next button
+                if (this.currentPage < this.totalPages) {
+                    pages.push(`
+                        <button onclick="ideasPage.goToPage(${this.currentPage + 1})" 
+                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
+                            ›
+                        </button>
+                    `);
+                }
+
+                pagination.innerHTML = pages.join('');
+            }
+
+            goToPage(page) {
+                this.currentPage = page;
+                this.updateURL();
+                this.loadPosts();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            updateShowingInfo() {
+                const start = (this.currentPage - 1) * this.perPage + 1;
+                const end = Math.min(this.currentPage * this.perPage, this.totalItems);
+                document.getElementById('showing-info').textContent = 
+                    `Showing ${start}-${end} of ${this.totalItems}`;
+            }
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
+
+            setupLazyLoading() {
+                const images = document.querySelectorAll('.lazy-load');
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.remove('lazy-load');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                images.forEach(img => imageObserver.observe(img));
+            }
+
+            setupParallax() {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const parallaxBg = document.querySelector('.parallax-bg');
+                    if (parallaxBg) {
+                        parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                });
+            }
+
+            setupHeaderScroll() {
+                const header = document.getElementById('header');
+                
+                window.addEventListener('scroll', () => {
+                    const currentScrollY = window.pageYOffset;
+                    
+                    if (currentScrollY > 100) {
+                        if (currentScrollY > this.lastScrollY) {
+                            // Scrolling down
+                            header.classList.add('header-hidden');
+                            header.classList.remove('header-visible');
+                        } else {
+                            // Scrolling up
+                            header.classList.remove('header-hidden');
+                            header.classList.add('header-visible');
+                        }
+                    } else {
+                        // At top
+                        header.classList.remove('header-hidden', 'header-visible');
+                    }
+                    
+                    this.lastScrollY = currentScrollY;
+                });
+            }
+
+            renderError() {
+                const grid = document.getElementById('posts-grid');
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-gray-500 text-lg">Failed to load posts. Please try again later.</p>
+                        <button onclick="ideasPage.loadPosts()" 
+                                class="mt-4 px-6 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page
+        const ideasPage = new IdeasPage();
+    </script>
+</body>
+</html>
