@@ -1,485 +1,680 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideas - Suitmedia</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .parallax-container {
-    position: relative;
-    overflow: hidden; /* Penting agar gambar yang keluar tidak tampil */
-    height: 24rem; /* h-96 = 384px */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warmindo Delisa Ciremai</title>
+  <link rel="icon" href="assets/logo-delisa-ciremai.png" type="image/png" />
+  <link href="src/output.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6PN4VK5QE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6PN4VK5QE');
+</script>
+<style>
+  /* * {
+  outline: 1px solid red;
+} */
+ html, body {
+  overflow-x: hidden;
 }
 
-.parallax-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* ubah dari 120% menjadi 100% */
-    background-image: url(assets/bg-idea.jpg);
-    background-size: cover;
-    background-position: center;
-    will-change: transform;
-    z-index: 0;
-}
-
-.parallax-content {
-    position: relative;
-    z-index: 10;
-}
-
-.banner-parallax {
-            transform: translateY(var(--scroll-offset, 0));
-        }
-        
-        .banner-clip {
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-}
-
-
-        
-        .header-hidden {
-            transform: translateY(-100%);
-        }
-        
-        .header-visible {
-            transform: translateY(0);
-            background-color: rgba(255, 87, 34, 0.95);
-        }
-        
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .card-image {
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-        
-        .loading {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-    </style>
+</style>
 </head>
-<body class="bg-white">
-    <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-orange-600 text-white transition-all duration-300 ease-in-out">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between lg:max-w-screen-xl">
-    
-    <!-- Logo -->
-    <div class="flex items-center">
-      <img src="assets/cropted-logo-suitmedia-removebg.png" alt="Suitmedia Logo" class="h-8">
+<body class="antialiased text-gray-800 scroll-smooth">
+
+<!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-white/76 backdrop-blur-md shadow-sm z-50">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo + Judul -->
+      <div class="flex items-center">
+        <img src="assets/logo-delisa-ciremai.png"
+             alt="Warmindo Delisa Ciremai Logo"
+             class="h-12 w-12 mr-2 object-cover">
+        <span class="hidden md:block text-2xl font-bold text-red-600">
+          Warmindo Delisa Ciremai
+        </span>
+      </div>
+
+      <!-- Tombol Toggle (mobile) -->
+      <button id="menu-toggle"
+              class="xl:hidden text-red-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Menu Navigasi Desktop -->
+      <nav class="hidden xl:flex space-x-6 text-gray-800">
+        <a href="#home"       class="hover:text-red-600 transition">Home</a>
+        <a href="#tentang"  class="hover:text-red-600 transition">Tentang Kami</a>
+        <a href="#menu"   class="hover:text-red-600 transition">Menu Unggulan</a>
+        <a href="#informasi"  class="hover:text-red-600 transition">Informasi</a>
+        <a href="#testi"  class="hover:text-red-600 transition">Testimoni</a>
+        <a href="#kontak" class="hover:text-red-600 transition">Kontak</a>
+      </nav>
+
+      <!-- Tombol Reservasi Desktop -->
+      <a href="https://www.google.com/maps?q=Delisa+Warmindo+Ciremai" target="_blank"
+         class="hidden xl:block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+        Datang Sekarang
+      </a>
     </div>
 
-    <!-- Hamburger button (mobile only) -->
-    <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"></path>
+    <!-- Menu Navigasi Mobile -->
+    <div id="mobile-menu"
+     class="xl:hidden hidden absolute top-full left-0 w-full px-6 pb-4 text-center
+            bg-white/95 backdrop-blur-md backdrop-saturate-150 shadow rounded-b-xl z-40">
+      <a href="#home"       class="block py-2 hover:text-red-600 transition">Home</a>
+      <a href="#tentang"  class="block py-2 hover:text-red-600 transition">Tentang Kami</a>
+      <a href="#menu"   class="block py-2 hover:text-red-600 transition">Menu Unggulan</a>
+      <a href="#informasi"  class="block py-2 hover:text-red-600 transition">Informasi</a>
+      <a href="#testi"  class="block py-2 hover:text-red-600 transition">Testimoni</a>
+      <a href="#kontak" class="block py-2 hover:text-red-600 transition">Kontak</a>
+      <a href="https://www.google.com/maps?q=Delisa+Warmindo+Ciremai" target="_blank"
+         class="block mt-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+        Datang Sekarang
+      </a>
+    </div>
+  </header>
+
+<!-- Hero Section -->
+<section id="home" class="relative pt-20" style="background-image: linear-gradient(to bottom, #fde5ea 0%, #feecf0 80%, #ffffff 100%)">
+  <div class="container mx-auto px-6 py-16 lg:py-20 flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
+    
+    <!-- Konten Teks -->
+    <div class="lg:w-1/2 text-center lg:text-left" data-aos="fade-right">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-red-600 mb-4">
+        Rasa Restoran,
+      </h1>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
+        Harga Pelajar
+      </h1>
+      <p class="text-gray-600 mb-6">
+        Nikmati sensasi rasa hangat khas Warmindo Delisa Ciremai di setiap suapan.
+      </p>
+      <div class="space-y-3 sm:space-y-0 sm:space-x-4">
+        <a href="#menu" class="inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">
+          Lihat Menu
+        </a>
+        <a href="#kontak" class="inline-block border border-red-600 text-red-600 px-6 py-3 rounded-lg hover:bg-red-50 transition">
+          Hubungi Kami
+        </a>
+      </div>
+    </div>
+
+    <!-- Gambar Hero -->
+<div class="lg:w-1/2" data-aos="fade-left">
+  <img src="assets/edt-crop-delisa-malam.png" 
+       alt="Warmindo Delisa Ciremai"
+       class="w-full max-w-md lg:max-w-none mx-auto rounded-lg shadow-lg" />
+</div>
+
+  </div>
+</section>
+
+  <!-- Tentang Kami -->
+<section id="tentang" class="pt-20 pb-20 scroll-mt-6">
+  <div class="container mx-auto px-6 flex flex-col-reverse lg:flex-row items-center gap-12">
+    
+    <!-- Gambar -->
+    <div class="lg:w-1/2 w-full h-124" data-aos="fade-right">
+      <img src="assets/interior-delisa-real.png" alt="Interior Warmindo" class="w-full h-full object-cover rounded-2xl shadow-xl" />
+    </div>
+
+    <!-- Konten -->
+    <div class="lg:w-1/2 w-full" data-aos="fade-left">
+      
+      <!-- Badge -->
+      <span class="inline-flex items-center gap-2 text-red-600 bg-red-100 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+          <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
+          <line x1="9" y1="9" x2="10" y2="9" />
+          <line x1="9" y1="13" x2="15" y2="13" />
+          <line x1="9" y1="17" x2="15" y2="17" />
+        </svg>
+        Tentang Kami
+      </span>
+
+      <!-- Judul -->
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-snug">
+        Warmindo dengan Cita Rasa Istimewa
+      </h2>
+
+      <!-- Deskripsi -->
+      <p class="text-gray-600 mb-6">
+        Warmindo Ciremai hadir untuk kamu yang cari rasa restoran, porsi banyak, harga bersahabat, dan tempat nongkrong yang santai. Dari indomie rebus sampe nasi ayam orak arik sambal balado, semua ada di sini!
+      </p>
+
+      <!-- Fitur -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        
+        <!-- Fitur 1 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+              <path d="M8.5 8.5v.01" />
+              <path d="M16 15.5v.01" />
+              <path d="M12 12v.01" />
+              <path d="M11 17v.01" />
+              <path d="M7 14v.01" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Bahan Berkualitas</p>
+            <p class="text-sm text-gray-600">Selalu segar dan terjamin</p>
+          </div>
+        </div>
+
+        <!-- Fitur 2 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M12 6v6l4 2m5-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Buka Sampai Larut</p>
+            <p class="text-sm text-gray-600">06.00 – 02.00 WIB</p>
+          </div>
+        </div>
+
+        <!-- Fitur 3 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
+              <path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0Z" />
+              <path d="M5 14h14" />
+              <path d="M9 16v2" />
+              <path d="M15 16v2" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Tempat Nyaman</p>
+            <p class="text-sm text-gray-600">Cocok untuk nongkrong</p>
+          </div>
+        </div>
+
+        <!-- Fitur 4 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Rasa Enak</p>
+            <p class="text-sm text-gray-600">Warung tapi nagih</p>
+          </div>
+        </div>
+
+        <!-- Fitur 5 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.53 16.11a6.993 6.993 0 016.94 0m-9.06-2.47a10.006 10.006 0 0111.18 0m-13.3-2.46a13.972 13.972 0 0115.42 0M12 20h.01" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Wifi Kenceng</p>
+            <p class="text-sm text-gray-600">Streaming lancar, tugas aman</p>
+          </div>
+        </div>
+
+        <!-- Fitur 6 -->
+        <div class="flex items-start gap-3">
+          <div class="bg-red-100 text-red-600 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a4 4 0 014 4 4 4 0 11-8 0 4 4 0 014-4zm0 10a7 7 0 00-6.938 6h13.876A7 7 0 0010 12z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Penjual Ramah</p>
+            <p class="text-sm text-gray-600">Datang sekali, serasa langganan</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Menu Unggulan -->
+  <section id="menu" class="bg-gray-50 py-16 lg:py-20 scroll-mt-6">
+    <div class="container mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-full text-lg font-medium mb-4" data-aos="fade-up">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2" 
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+    <line x1="6" y1="17" x2="18" y2="17" />
+  </svg>
+  <span>Menu Unggulan</span>
+</div>
+
+<!-- Judul -->
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2" data-aos="fade-up">
+  Menu Unggulan
+</h2>
+<p class="text-gray-600 mb-12 max-w-2xl mx-auto text-center" data-aos="fade-up">
+  Nikmati berbagai menu favorit kami yang dibuat dengan bahan berkualitas dan resep rahasia.
+</p>
+
+<!-- Grid Card -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+  <!-- Card Template -->
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up">
+    <!-- Gambar -->
+    <div class="relative h-60">
+      <img src="assets/orak-arik-telor-delisa.png" alt="Nasi Telor Orak Arik"
+           class="w-full h-full object-cover" />
+      <span class="absolute top-3 left-3 bg-red-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+        Favorit
+      </span>
+    </div>
+    <!-- Body -->
+    <div class="p-6 text-left">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-xl font-semibold text-gray-900">Nasi Telur Orak Arik</h3>
+        <span class="bg-red-100 text-red-600 text-sm font-medium px-3 py-1 rounded-full">
+          Rp 10K
+        </span>
+      </div>
+      <p class="text-gray-600 mb-6 text-sm">
+        Nasi hangat dengan telur orak-arik lembut dan kecap manis khas, berpadu dalam rasa gurih manis yang menggugah selera.
+      </p>
+      <a href="#reservasi"
+         class="block w-full bg-red-600 text-white text-center py-2 rounded-lg hover:bg-red-700 transition">
+        Pesan Sekarang
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up">
+    <div class="relative h-60">
+      <img src="assets/magelang rendang gmn.png" alt="Magelangan Rendang"
+           class="w-full h-full object-cover" />
+      <span class="absolute top-3 left-3 bg-red-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+        Favorit
+      </span>
+    </div>
+    <div class="p-6 text-left">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-xl font-semibold text-gray-900">Magelangan Rendang</h3>
+        <span class="bg-red-100 text-red-600 text-sm font-medium px-3 py-1 rounded-full">
+          Rp 11K
+        </span>
+      </div>
+      <p class="text-gray-600 mb-6 text-sm">
+        Nasi goreng dan Indomie rendang berpadu dalam satu piring pedas gurih dengan aroma rempah yang menggoda.
+      </p>
+      <a href="#reservasi"
+         class="block w-full bg-red-600 text-white text-center py-2 rounded-lg hover:bg-red-700 transition">
+        Pesan Sekarang
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up">
+  <div class="relative h-60">
+    <img src="assets/orak arik ayam gmn.png" alt="Orak Arik Ayam"
+         class="w-full h-full object-cover" />
+    <span class="absolute top-3 left-3 bg-red-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+      Manis
+    </span>
+  </div>
+  <div class="p-6 text-left">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text-xl font-semibold text-gray-900">Nasi Ayam Orak Arik</h3>
+      <span class="bg-red-100 text-red-600 text-sm font-medium px-3 py-1 rounded-full">
+        Rp 13K
+      </span>
+    </div>
+    <p class="text-gray-600 mb-6 text-sm">
+      Nasi hangat dengan ayam kecap orak-arik yang dimasak dengan bumbu gurih, menghasilkan cita rasa lezat yang menggugah selera.
+    </p>
+    <a href="#reservasi"
+       class="block w-full bg-red-600 text-white text-center py-2 rounded-lg hover:bg-red-700 transition">
+      Pesan Sekarang
+    </a>
+  </div>
+</div>
+
+</div>
+
+<!-- Tombol Lihat Semua -->
+<div class="mt-12 text-center" data-aos="fade-up">
+  <a href="#menu"
+     class="inline-block border-1 border-red-600 bg-white text-red-600 px-6 py-3 rounded-lg transition duration-300 hover:bg-red-600 hover:text-white hover:shadow-md">
+    Lihat Semua Menu
+  </a>
+</div>
+
+    </div>
+  </section>
+
+      <!-- Seksi Fitur Tambahan -->
+ <section id="informasi" class="container mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-12 scroll-mt-6">
+  <!-- KIRI: Informasi Lokasi -->
+  <div class="lg:w-1/2" data-aos="fade-right">
+    <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-full text-lg font-medium mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+     stroke="currentColor">
+  <!-- Pin Lokasi -->
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+  <!-- Lingkaran dipindahkan ke bawah (cy=10.5) -->
+  <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+</svg>
+      Lokasi & Jam Buka
+    </div>
+
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Kunjungi Kami di Ciremai</h2>
+    <p class="text-gray-600 mb-8">
+      Kami berlokasi di tempat yang strategis dan mudah dijangkau. Jangan lupa untuk mampir dan nikmati menu favorit kamu!
+    </p>
+
+    <div class="space-y-4 mb-6">
+      <div class="flex items-start gap-4">
+        <div class="bg-red-100 text-red-600 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+     stroke="currentColor">
+  <!-- Pin Lokasi -->
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+  <!-- Lingkaran dipindahkan ke bawah (cy=10.5) -->
+  <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+</svg>
+        </div>
+        <div>
+          <p class="font-semibold">Alamat</p>
+          <p>Jl. Raya Candi Indah, Jetis, Wedomartani, Kec. Ngemplak, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55584</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="bg-red-100 text-red-600 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold">Jam Buka</p>
+          <p>06.00 - 02.00 WIB (Setiap Hari)</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="bg-red-100 text-red-600 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+     viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M3 5.25C3 4.56 3.56 4 4.25 4h3.23a1 1 0 01.96.74l1.04 3.66a1 1 0 01-.21.93l-1.5 1.5a11.05 11.05 0 005.5 5.5l1.5-1.5a1 1 0 01.93-.21l3.66 1.04a1 1 0 01.74.96v3.23c0 .69-.56 1.25-1.25 1.25H18C10.82 21 3 13.18 3 6V5.25z" />
+</svg>
+        </div>
+        <div>
+          <p class="font-semibold">Kontak</p>
+          <p>Telp/WA: 08xx-xxxx-xxxx</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://www.google.com/maps?q=Delisa+Warmindo+Ciremai" target="_blank"
+      class="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-3 rounded-lg hover:bg-red-700 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+     stroke="currentColor">
+  <!-- Pin Lokasi -->
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+  <!-- Lingkaran dipindahkan ke bawah (cy=10.5) -->
+  <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+</svg>
+      Lihat di Google Maps
+    </a>
+  </div>
+
+  <!-- KANAN: Google Maps -->
+  <div class="lg:w-1/2 w-full h-[450px] rounded-2xl overflow-hidden shadow-xl" data-aos="fade-left">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.08846629537763!2d110.41469078510997!3d-7.745680532123127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59f2ad4e61c9%3A0xff6e707cf8ef234b!2sDelisa%20Ciremai%20(Warmindo)!5e0!3m2!1sid!2sid!4v1751907863942!5m2!1sid!2sid" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- Testimoni -->
+<section id="testi" class="bg-gray-50 py-20 scroll-mt-6">
+  <!-- Heading & Subtitle -->
+  <div class="container mx-auto px-6 text-center mb-12" data-aos="fade-up">
+    <span class="inline-flex items-center bg-red-100 text-red-600 px-4 py-1 rounded-full mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3.172 4.172a4 4 0 015.656 0L10 5.343l1.172-1.171a4 4 0 115.656 5.656L10 16.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
       </svg>
-    </button>
-
-    <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-8">
-      <a href="#" class="hover:text-orange-200 transition-colors">Work</a>
-      <a href="#" class="hover:text-orange-200 transition-colors">About</a>
-      <a href="#" class="hover:text-orange-200 transition-colors">Services</a>
-      <a href="#" class="border-b-2 border-white pb-1 font-semibold">Ideas</a>
-      <a href="#" class="hover:text-orange-200 transition-colors">Careers</a>
-      <a href="#" class="hover:text-orange-200 transition-colors">Contact</a>
-    </nav>
+      Testimoni Pelanggan
+    </span>
+    <h2 class="text-4xl font-bold text-gray-900 mb-4">Apa Kata Mereka?</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">Dengarkan pengalaman pelanggan kami yang sudah merasakan kelezatan menu Warmindo Delisa Ciremai</p>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="md:hidden px-4 pb-4 hidden bg-orange-600 text-white">
-    <a href="#" class="block py-2 border-b border-white/20">Work</a>
-    <a href="#" class="block py-2 border-b border-white/20">About</a>
-    <a href="#" class="block py-2 border-b border-white/20">Services</a>
-    <a href="#" class="block py-2 border-b border-white/20 font-bold">Ideas</a>
-    <a href="#" class="block py-2 border-b border-white/20">Careers</a>
-    <a href="#" class="block py-2">Contact</a>
-  </div>
-</header>
-
-    <!-- Banner -->
-    <section class="relative h-96 overflow-hidden banner-clip pt-24">
-        <div class="absolute inset-0 banner-parallax" style="background-image: url(assets/bg-idea.jpg); background-size: cover; background-position: center;">
+  <!-- Testimonial Cards -->
+  <div class="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Card 1 -->
+    <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up">
+      <div class="flex items-center mb-4">
+        <img src="assets/user_9650311.png" alt="Pelanggan 1" class="h-12 w-12 mr-4 object-cover rounded-full" />
+        <div>
+          <p class="font-semibold text-lg text-gray-900">Yoda</p>
+          <div class="flex mt-1 space-x-1 overflow-x-hidden">
+            <!-- 5 Stars -->
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+          </div>
         </div>
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-        <div class="relative z-10 h-full flex items-center justify-center text-center text-white">
-            <div>
-                <h1 class="text-5xl font-bold mb-4">Ideas</h1>
-                <p class="text-xl opacity-90">Where all our great things begin</p>
-            </div>
-        </div>
-    </section>
+      </div>
+      <p class="text-gray-600 italic">"Mie rebus spesialnya juara banget! Tempatnya juga nyaman buat nongkrong bareng temen-temen."</p>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-12 lg:max-w-screen-xl">
-        <!-- Controls -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div id="showing-info" class="text-gray-600">
-                Showing 1-10 of 100
-            </div>
-            <div class="flex gap-4">
-                <div class="flex items-center gap-2">
-                    <label for="per-page" class="text-gray-600">Show per page:</label>
-                    <select id="per-page" class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
-                <div class="flex items-center gap-2">
-                    <label for="sort-by" class="text-gray-600">Sort by:</label>
-                    <select id="sort-by" class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                        <option value="-published_at">Newest</option>
-                        <option value="published_at">Oldest</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Loading Indicator -->
-        <div id="loading" class="hidden text-center py-8">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
-            <p class="mt-2 text-gray-600">Loading...</p>
-        </div>
-
-        <!-- Posts Grid -->
-        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Posts will be loaded here -->
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="flex justify-center items-center gap-2">
-            <!-- Pagination will be loaded here -->
-        </div>
-    </main>
-
-    <script id="parallax-effect">
-        document.addEventListener('DOMContentLoaded', function() {
-            const parallaxElement = document.querySelector('.banner-parallax');
+    <!-- Card 2 -->
+    <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex items-center mb-4">
+        <img src="assets/profile_3.png" alt="Pelanggan 2" class="h-12 w-12 mr-4 rounded-full object-cover" />
+        <div>
+          <p class="font-semibold text-lg text-gray-900">Khoirul</p>
+          <div class="flex mt-1 space-x-1 overflow-x-hidden">
+            <!-- 4 Stars -->
+             <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
             
-            function handleParallax() {
-                const scrolled = window.pageYOffset;
-                const parallaxSpeed = 0.5;
-                parallaxElement.style.setProperty('--scroll-offset', `${scrolled * parallaxSpeed}px`);
-            }
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 italic">"Sambalnya mantap! Porsinya pas, harga juga ramah. Pelayanan ramah, recommended banget!"</p>
+    </div>
 
-            window.addEventListener('scroll', handleParallax, { passive: true });
+    <!-- Card 3 -->
+    <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+      <div class="flex items-center mb-4">
+        <img src="assets/profile-3d-side.png" alt="Pelanggan 3" class="h-12 w-12 mr-4 rounded-full object-cover" />
+        <div>
+          <p class="font-semibold text-lg text-gray-900">ilham</p>
+          <div class="flex mt-1 space-x-1 overflow-x-hidden">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+            <img src="assets/star-rating.png" alt="Star Rating Icon" class="h-4 w-4">
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 italic">"Suka banget sama mie goreng pedasnya! Pasti balik lagi. Tempatnya juga cozy buat nongkrong."</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+ <footer id="kontak" class="bg-emerald-700 text-white py-12 scroll-mt-10">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <!-- Kolom 1: Logo dan Deskripsi -->
+    <div>
+      <div class="flex items-center mb-4">
+        <img src="assets/logo-delisa-ciremai.png" alt="Logo" class="w-12 h-12 mr-3">
+        <h2 class="text-xl font-bold">Warmindo Delisa Ciremai</h2>
+      </div>
+      <p class="text-emerald-100">Warmindo dengan cita rasa istimewa yang menghadirkan kelezatan masakan rumahan dengan harga bersahabat.</p>
+      <div class="flex gap-4 mt-4">
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-amber-400 rounded-full text-emerald-900 hover:bg-amber-300 transition">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-amber-400 rounded-full text-emerald-900 hover:bg-amber-300 transition">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="w-10 h-10 flex items-center justify-center bg-amber-400 rounded-full text-emerald-900 hover:bg-amber-300 transition">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Kolom 2: Menu Favorit -->
+    <div>
+      <h3 class="text-lg font-bold mb-4">Menu Favorit</h3>
+      <ul class="text-emerald-100 space-y-2">
+        <li>Nasi Telur Orak Arik</li>
+        <li>Magelangan Rendang</li>
+        <li>Nasi Ayam Orak Arik</li>
+        <li>Mie Dok Dok</li>
+        <li>Es Kopi Americano</li>
+      </ul>
+    </div>
+
+    <!-- Kolom 3: Layanan -->
+    <div>
+      <h3 class="text-lg font-bold mb-4">Layanan</h3>
+      <ul class="text-emerald-100 space-y-2">
+        <li>Dine In</li>
+        <li>Take Away</li>
+      </ul>
+    </div>
+
+    <!-- Kolom 4: Kontak -->
+    <div>
+      <h3 class="text-lg font-bold mb-4">Kontak</h3>
+      <ul class="text-emerald-100 space-y-4">
+
+        <!-- Alamat -->
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-400 flex-none shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+            <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+          <span class="flex-1">
+            Jl. Raya Candi Indah, Jetis, Wedomartani, Kec. Ngemplak, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55584
+          </span>
+        </li>
+
+        <!-- Telepon -->
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-400 flex-none shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5.25C3 4.56 3.56 4 4.25 4h3.23a1 1 0 01.96.74l1.04 3.66a1 1 0 01-.21.93l-1.5 1.5a11.05 11.05 0 005.5 5.5l1.5-1.5a1 1 0 01.93-.21l3.66 1.04a1 1 0 01.74.96v3.23c0 .69-.56 1.25-1.25 1.25H18C10.82 21 3 13.18 3 6V5.25z" />
+          </svg>
+          <span class="flex-1">08xx-xxxx-xxxx</span>
+        </li>
+
+        <!-- Jam Operasional -->
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-amber-400 flex-none shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="flex-1">06.00 - 02.00 WIB (Setiap Hari)</span>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer bawah -->
+  <div class="mt-10 border-t border-emerald-600 pt-6 text-center text-emerald-200 text-sm">
+    © 2025 Warmindo Delisa Ciremai. All rights reserved.
+  </div>
+</footer>
+
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+    // Mobile menu toggle
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Animasi scroll ketika klik href
+      // Ambil semua link anchor internal
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      // Cegah aksi default (langsung lompat)
+      e.preventDefault();
+
+      // Ambil target berdasarkan href
+      const targetID = this.getAttribute('href');
+      const target = document.querySelector(targetID);
+
+      // Scroll ke elemen dengan animasi
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
-
-        //toggle mobile-navbar
-        const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-
-  toggle.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
+      }
+    });
   });
-    </script>
+  </script>
 
-    <script>
-        class IdeasPage {
-            constructor() {
-                this.currentPage = 1;
-                this.perPage = 10;
-                this.sortBy = '-published_at';
-                this.totalItems = 0;
-                this.totalPages = 0;
-                this.lastScrollY = 0;
-                this.isLoading = false;
-                
-                this.init();
-            }
-
-            init() {
-                this.setupEventListeners();
-                this.loadStateFromURL();
-                this.loadPosts();
-                this.setupParallax();
-                this.setupHeaderScroll();
-            }
-
-            setupEventListeners() {
-                document.getElementById('per-page').addEventListener('change', (e) => {
-                    this.perPage = parseInt(e.target.value);
-                    this.currentPage = 1;
-                    this.updateURL();
-                    this.loadPosts();
-                });
-
-                document.getElementById('sort-by').addEventListener('change', (e) => {
-                    this.sortBy = e.target.value;
-                    this.currentPage = 1;
-                    this.updateURL();
-                    this.loadPosts();
-                });
-            }
-
-            loadStateFromURL() {
-                const urlParams = new URLSearchParams(window.location.search);
-                this.currentPage = parseInt(urlParams.get('page')) || 1;
-                this.perPage = parseInt(urlParams.get('size')) || 10;
-                this.sortBy = urlParams.get('sort') || '-published_at';
-
-                document.getElementById('per-page').value = this.perPage;
-                document.getElementById('sort-by').value = this.sortBy;
-            }
-
-            updateURL() {
-                const params = new URLSearchParams();
-                params.set('page', this.currentPage);
-                params.set('size', this.perPage);
-                params.set('sort', this.sortBy);
-                
-                const newURL = `${window.location.pathname}?${params.toString()}`;
-                window.history.replaceState({}, '', newURL);
-            }
-
-            async loadPosts() {
-    if (this.isLoading) return;
-
-    this.isLoading = true;
-    this.showLoading(true);
-
-    try {
-        const url = `https://suitmedia-backend.suitdev.com/api/ideas?page[number]=${this.currentPage}&page[size]=${this.perPage}&append[]=small_image&append[]=medium_image&sort=${this.sortBy}`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        this.totalItems = data.meta.total;
-        this.totalPages = data.meta.last_page;
-
-        this.renderPosts(data.data);
-        this.renderPagination();
-        this.updateShowingInfo();
-    } catch (error) {
-        console.error('Error loading posts:', error);
-        this.renderError();
-    } finally {
-        this.isLoading = false;
-        this.showLoading(false);
-    }
-}
-
-
-            showLoading(show) {
-                const loading = document.getElementById('loading');
-                const grid = document.getElementById('posts-grid');
-                
-                if (show) {
-                    loading.classList.remove('hidden');
-                    grid.classList.add('loading');
-                } else {
-                    loading.classList.add('hidden');
-                    grid.classList.remove('loading');
-                }
-            }
-
-renderPosts(posts) {
-    const grid = document.getElementById('posts-grid');
-
-    // Gambar fallback A dan B
-    const imageA = 'assets/pictureA.jpg';
-    const imageB = 'assets/pictureB.jpg';
-
-    grid.innerHTML = posts.map((post, index) => {
-        const fallbackImage = index % 2 === 0 ? imageA : imageB;
-
-        return `
-            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img 
-                    src="${fallbackImage}" 
-                    alt="Fallback Image"
-                    class="card-image w-full lazy-load"
-                    loading="lazy"
-                >
-                <div class="p-4">
-                    <time class="text-sm text-gray-500">${this.formatDate(post.published_at)}</time>
-                    <h3 class="font-semibold text-gray-900 mt-2 line-clamp-3 leading-tight">
-                        ${post.title}
-                    </h3>
-                </div>
-            </article>
-        `;
-    }).join('');
-
-    this.setupLazyLoading();
-}
-
-            renderPagination() {
-                const pagination = document.getElementById('pagination');
-                const pages = [];
-
-                // Previous button
-                if (this.currentPage > 1) {
-                    pages.push(`
-                        <button onclick="ideasPage.goToPage(${this.currentPage - 1})" 
-                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
-                            ‹
-                        </button>
-                    `);
-                }
-
-                // Page numbers
-                const startPage = Math.max(1, this.currentPage - 2);
-                const endPage = Math.min(this.totalPages, this.currentPage + 2);
-
-                if (startPage > 1) {
-                    pages.push(`
-                        <button onclick="ideasPage.goToPage(1)" 
-                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
-                            1
-                        </button>
-                    `);
-                    if (startPage > 2) {
-                        pages.push('<span class="px-3 py-2 text-gray-400">...</span>');
-                    }
-                }
-
-                for (let i = startPage; i <= endPage; i++) {
-                    const isActive = i === this.currentPage;
-                    pages.push(`
-                        <button onclick="ideasPage.goToPage(${i})" 
-                                class="px-3 py-2 ${isActive ? 'bg-orange-600 text-white' : 'text-gray-500 hover:text-orange-600'} transition-colors rounded">
-                            ${i}
-                        </button>
-                    `);
-                }
-
-                if (endPage < this.totalPages) {
-                    if (endPage < this.totalPages - 1) {
-                        pages.push('<span class="px-3 py-2 text-gray-400">...</span>');
-                    }
-                    pages.push(`
-                        <button onclick="ideasPage.goToPage(${this.totalPages})" 
-                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
-                            ${this.totalPages}
-                        </button>
-                    `);
-                }
-
-                // Next button
-                if (this.currentPage < this.totalPages) {
-                    pages.push(`
-                        <button onclick="ideasPage.goToPage(${this.currentPage + 1})" 
-                                class="px-3 py-2 text-gray-500 hover:text-orange-600 transition-colors">
-                            ›
-                        </button>
-                    `);
-                }
-
-                pagination.innerHTML = pages.join('');
-            }
-
-            goToPage(page) {
-                this.currentPage = page;
-                this.updateURL();
-                this.loadPosts();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-
-            updateShowingInfo() {
-                const start = (this.currentPage - 1) * this.perPage + 1;
-                const end = Math.min(this.currentPage * this.perPage, this.totalItems);
-                document.getElementById('showing-info').textContent = 
-                    `Showing ${start}-${end} of ${this.totalItems}`;
-            }
-
-            formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-            }
-
-            setupLazyLoading() {
-                const images = document.querySelectorAll('.lazy-load');
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.classList.remove('lazy-load');
-                            observer.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => imageObserver.observe(img));
-            }
-
-            setupParallax() {
-                window.addEventListener('scroll', () => {
-                    const scrolled = window.pageYOffset;
-                    const parallaxBg = document.querySelector('.parallax-bg');
-                    if (parallaxBg) {
-                        parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    }
-                });
-            }
-
-            setupHeaderScroll() {
-                const header = document.getElementById('header');
-                
-                window.addEventListener('scroll', () => {
-                    const currentScrollY = window.pageYOffset;
-                    
-                    if (currentScrollY > 100) {
-                        if (currentScrollY > this.lastScrollY) {
-                            // Scrolling down
-                            header.classList.add('header-hidden');
-                            header.classList.remove('header-visible');
-                        } else {
-                            // Scrolling up
-                            header.classList.remove('header-hidden');
-                            header.classList.add('header-visible');
-                        }
-                    } else {
-                        // At top
-                        header.classList.remove('header-hidden', 'header-visible');
-                    }
-                    
-                    this.lastScrollY = currentScrollY;
-                });
-            }
-
-            renderError() {
-                const grid = document.getElementById('posts-grid');
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-12">
-                        <p class="text-gray-500 text-lg">Failed to load posts. Please try again later.</p>
-                        <button onclick="ideasPage.loadPosts()" 
-                                class="mt-4 px-6 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors">
-                            Retry
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        // Initialize the page
-        const ideasPage = new IdeasPage();
-    </script>
 </body>
 </html>
